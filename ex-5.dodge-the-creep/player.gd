@@ -8,6 +8,7 @@ var screen_size: Vector2 # Mida de la finestra de joc
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	hide()
+	start(Vector2(240, 450))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
