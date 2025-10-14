@@ -1,14 +1,14 @@
 extends RigidBody2D
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$AnimatedSprite2D.playing = true
-	var mob_types = $AnimatedSprite2D.frames.get_animation_names()
+	# Inicia l’animació
+	$AnimatedSprite2D.play()
+	
+	# Obté totes les animacions disponibles i tria’n una a l’atzar
+	var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
+	randomize()
 	$AnimatedSprite2D.animation = mob_types[randi() % mob_types.size()]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
+# Aquest mètode es cridarà quan el mob surti de la pantalla
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
