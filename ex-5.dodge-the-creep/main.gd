@@ -18,6 +18,7 @@ func game_over() -> void:
 	$HUD.show_game_over()
 
 func new_game():
+	get_tree().call_group("mobs", "queue_free")
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
@@ -36,6 +37,7 @@ func _on_start_timer_timeout() -> void:
 func _on_mob_timer_timeout() -> void:
 	# Crea una nova instància de l'escena Mob.
 	var mob = mob_scene.instantiate()
+	mob.add_to_group("mobs")
 	# Trieu una ubicació aleatòria a Path2D.
 	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
 	mob_spawn_location.progress_ratio = randf()  # offset → progress_ratio en Godot 4
