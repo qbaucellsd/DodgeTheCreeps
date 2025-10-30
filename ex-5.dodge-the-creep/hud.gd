@@ -7,18 +7,26 @@ func show_message(text):
 	$Missatge.show()
 	$MessageTimer.start()
 
-func show_game_over():
-	show_message("Game Over")
-	# Espereu fins que el MessageTimer hagi acabat de comptar.
+func show_game_over(score1: int, score2: int):
+	var winner_text = ""
+	if score1 > score2:
+		winner_text = "Player 1 ha guanyat!"
+	elif score2 > score1:
+		winner_text = "Player 2 ha guanyat!"
+	else:
+		winner_text = "Empat!"
+	show_message("Game Over\n" + winner_text)
 	await $MessageTimer.timeout
 	$Missatge.text = "Dodge the\nCreeps!"
 	$Missatge.show()
-	# Feu un temporitzador one-shot i espereu que acabi.
 	await get_tree().create_timer(1).timeout
 	$StartButton.show()
 
 func update_score(score):
 	$ScoreLabel.text = str(score)
+
+func update_score2(score2):
+	$ScoreLabel2.text = str(score2)
 
 func _on_start_button_pressed() -> void:
 	$StartButton.hide()
